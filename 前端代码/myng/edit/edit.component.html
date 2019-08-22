@@ -1,0 +1,19 @@
+<div class="content__title">
+  <h1>{{title}}</h1>
+</div>
+<nz-card [nzBordered]="false">
+  <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()" se-container="1" labelWidth="200">
+    <se label="id" error="id自动生成,不可编辑" required>
+      <input nz-input formControlName="id" placeholder="id自动生成,不可编辑" disabled="disabled" />
+    </se>
+    <se label="姓名" error="请输入姓名" required>
+      <input nz-input formControlName="name" placeholder="用户姓名" />
+    </se>
+    <se label="年龄" error="请输入年龄" required>
+      <input nz-input formControlName="age" placeholder="用户年龄" />
+    </se>
+    <se>
+      <button nz-button nzType="primary" type="submit" [nzLoading]="submitting">保存</button>
+    </se>
+  </form>
+</nz-card>

@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <div class="modal-title">编辑用户信息</div>
+</div>
+<nz-spin *ngIf="!user" class="modal-spin"></nz-spin>
+<div sv-container *ngIf="user">
+  <nz-card [nzBordered]="false">
+    <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()" se-container="1" labelWidth="150">
+      <se label="id" error="id自动生成,不可编辑" required>
+        <input nz-input formControlName="id" placeholder="id自动生成,不可编辑" disabled="disabled" />
+      </se>
+      <se label="姓名" error="请输入姓名" required>
+        <input nz-input formControlName="name" placeholder="用户姓名" />
+      </se>
+      <se label="年龄" error="请输入年龄" required>
+        <input nz-input formControlName="age" placeholder="用户年龄" />
+      </se>
+    </form>
+  </nz-card>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="submit()">保存</button>
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

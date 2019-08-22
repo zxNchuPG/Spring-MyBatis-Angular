@@ -1,0 +1,32 @@
+<nz-card>
+  <form nz-form [formGroup]="form" (ngSubmit)="search()" se-container="1">
+    <input nz-input formControlName="fid" placeholder="用户id" style="width:100px;margin-left:15px " />
+    <input nz-input formControlName="fname" placeholder="用户姓名" style="width:100px;margin:0px 10px 0px 10px" />
+    <input nz-input formControlName="fage" placeholder="用户年龄" style="width:100px;margin-right:10px" />
+    <button nz-button nzType="primary" type="submit" [nzLoading]="submitting">搜索</button>
+  </form>
+</nz-card>
+<!-- CRUD操作按钮,方法对应first.component.ts -->
+
+<nz-card>
+  <button nz-button (click)="add()">
+    <i class="anticon anticon-plus"></i>新增
+  </button>
+  <button nz-button (click)="edit()">
+    <i class="anticon anticon-edit"></i>编辑
+  </button>
+  <button nz-button (click)="delete()">
+    <i class="anticon anticon-delete"></i>删除
+  </button>
+
+  <div class="my-md">
+    <nz-alert [nzType]="'info'" [nzShowIcon]="true" [nzMessage]="message">
+      <ng-template #message>
+        已勾选
+        <strong class="text-primary">{{ selectedRows.length }}</strong> 项
+        <a *ngIf="selectedRows.length > 0" (click)="st.clearCheck()" class="ml-lg">清空</a>
+      </ng-template>
+    </nz-alert>
+  </div>
+  <st #st [data]="data" [columns]="columns" [loading]="loading" (change)="stChange($event)"></st>
+</nz-card>

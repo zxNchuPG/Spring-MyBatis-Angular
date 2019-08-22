@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.mapper.UsersMapper">
+	<insert id="insertUser" parameterType="users">
+		insert into
+		users(name,age) values(#{name},#{age})
+	</insert>
+	<select id="selcetUsersAll" resultType="users">
+		select id,name,age from
+		users
+	</select>
+	<select id="selectUsersById" resultType="users">
+		select id,name,age from
+		users where id = #{value}
+	</select>
+	<update id="updateUsers" parameterType="users">
+		update users set
+		name=#{name},age=#{age} where id=#{id}
+	</update>
+	<delete id="deleteUserById">
+		delete from users where id=#{value}
+	</delete>
+	<select id="search" resultType="users" parameterType="users">
+		select id,name,age from
+		users 
+		<where>
+			<if test="id != null and id != '' ">
+				id=#{id}  
+			</if>
+			<if test="name != null and name != '' ">
+				and name LIKE CONCAT(CONCAT('%', #{name}),'%')
+			</if>
+			<if test="age != null and age != '' ">
+				and age=#{age}
+			</if>
+		</where>
+	</select>
+	<delete id="delUserByIdList" parameterType="java.util.List">
+		DELETE FROM users WHERE id IN
+		<foreach collection="idList" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>
